@@ -29,8 +29,8 @@ namespace CollegeXYZ.Server.Data.SeedDatabaseService
                     Description = "This is a demo course",
 
                 };
-                await Context.AddAsync(defaultCourse);
-                await Context.SaveChangesAsync();
+                Context.Add(defaultCourse);
+                Context.SaveChanges();
             }
             if (!Context.Students.AsNoTracking().Any(s => s.Name.Equals("DefaultStudent")))
             {
@@ -39,8 +39,8 @@ namespace CollegeXYZ.Server.Data.SeedDatabaseService
                     Name = "DefaultStudent",
                     ContactDetails = "0900320032"
                 };
-                await Context.AddAsync(defaultStudent);
-                await Context.SaveChangesAsync();
+                Context.Add(defaultStudent);
+                Context.SaveChanges();
             }
 
             if (!Context.Grades.AsNoTracking().Any(g => g.AcademicPeriod.Equals("DemoGrade")))
@@ -49,12 +49,12 @@ namespace CollegeXYZ.Server.Data.SeedDatabaseService
                 {
                     CourseId = 1,
                     LetterGrade = 'A',
-                    StudentId = 2,
+                    StudentId = 1,
                     AcademicPeriod = "DemoGrade",
 
                 };
-                await Context.AddAsync(defaultGrade);
-                await Context.SaveChangesAsync();
+                Context.Add(defaultGrade);
+                Context.SaveChanges();
             }
 
         }
