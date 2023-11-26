@@ -10,6 +10,6 @@
 
         public ICollection<Grade> Grades { get; set; }
 
-        
+
     }
 }

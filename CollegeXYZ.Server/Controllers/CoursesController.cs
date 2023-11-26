@@ -7,23 +7,38 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CollegeXYZ.Server.Controllers
 {
+    /// <summary>
+    /// Controller for managing courses.
+    /// </summary>
 
     [Route("api/[controller]")]
     [ApiController]
     public class CoursesController : ControllerBase
     {
         private readonly CollegeXYZDbContext _context;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoursesController"/> class.
+        /// </summary>
+        /// <param name="context">Database context used for course operations.</param>
         public CoursesController(CollegeXYZDbContext context)
         {
             _context = context;
         }
+        /// <summary>
+        /// Retrieves all courses.
+        /// </summary>
+        /// <returns>A list of courses.</returns>
         // GET: api/<CoursesController>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Course>>> Get()
         {
             return await _context.Courses.ToListAsync();
         }
+        /// <summary>
+        /// Retrieves a specific course by its identifier.
+        /// </summary>
+        /// <param name="id">The ID of the course to retrieve.</param>
+        /// <returns>The requested course if found; otherwise, NotFound.</returns>
 
         // GET api/<CoursesController>/5
         [HttpGet("{id}")]
@@ -38,6 +53,11 @@ namespace CollegeXYZ.Server.Controllers
 
             return course;
         }
+        /// <summary>
+        /// Creates a new course.
+        /// </summary>
+        /// <param name="model">The course data transfer object (DTO).</param>
+        /// <returns>The created course with status code 201 (Created).</returns>
 
         // POST api/<CoursesController>
         [HttpPost]
@@ -56,6 +76,12 @@ namespace CollegeXYZ.Server.Controllers
 
             return CreatedAtAction("Get", new { id = course.Id }, course);
         }
+        /// <summary>
+        /// Updates an existing course.
+        /// </summary>
+        /// <param name="id">The ID of the course to update.</param>
+        /// <param name="model">The updated course data.</param>
+        /// <returns>NoContent if update is successful; otherwise, BadRequest or NotFound.</returns>
 
         // PUT api/<CoursesController>/5
         [HttpPut("{id}")]
@@ -71,7 +97,7 @@ namespace CollegeXYZ.Server.Controllers
                 return NotFound();
             }
 
-            
+
             course.Title = model.Title;
             course.CourseCode = model.CourseCode;
             course.Description = model.Description;
@@ -82,7 +108,11 @@ namespace CollegeXYZ.Server.Controllers
 
             return NoContent();
         }
-
+        ///<summary>
+        /// Deletes a specific course.
+        /// </summary>
+        /// <param name="id">The ID of the course to delete.</param>
+        /// <returns>NoContent if deletion is successful; otherwise, NotFound.</returns>
         // DELETE api/<CoursesController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
