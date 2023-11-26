@@ -1,49 +1,35 @@
-import { useEffect, useState } from 'react';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-function App() {
-    const [forecasts, setForecasts] = useState();
 
-    useEffect(() => {
-        populateWeatherData();
-    }, []);
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import theme from './theme'; 
+import './index.css';
+import './app.css';
+import HomePage from './views/homePage/homePage';
+import Courses from './views/course/Courses'; 
+import Students from './views/student/Students'; 
+import Grades from './views/grade/Grades'; 
+import Analytics from './views/analytics/analytics'; 
+import Header from './components/Header';
 
-    const contents = forecasts === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-        : <table className="table table-striped" aria-labelledby="tabelLabel">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Temp. (C)</th>
-                    <th>Temp. (F)</th>
-                    <th>Summary</th>
-                </tr>
-            </thead>
-            <tbody>
-                {forecasts.map(forecast =>
-                    <tr key={forecast.date}>
-                        <td>{forecast.date}</td>
-                        <td>{forecast.temperatureC}</td>
-                        <td>{forecast.temperatureF}</td>
-                        <td>{forecast.summary}</td>
-                    </tr>
-                )}
-            </tbody>
-        </table>;
 
-    return (
-        <div>
-            <h1 id="tabelLabel">Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            {contents}
-        </div>
-    );
-    
-    async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        const data = await response.json();
-        setForecasts(data);
-    }
-}
+
+
+const App = () => (
+  <ThemeProvider theme={theme}> 
+  <CssBaseline /> 
+  <Router>
+    <Routes>
+    <Route path="/" element={<HomePage />} />
+      <Route path="/courses" element={<Courses />} />
+      <Route path="/students" element={<Students />} />
+      <Route path="/grades" element={<Grades />} />
+      <Route path="/analytics" element={<Analytics />} />
+    </Routes>
+  </Router>
+  
+</ThemeProvider>
+);
 
 export default App;
