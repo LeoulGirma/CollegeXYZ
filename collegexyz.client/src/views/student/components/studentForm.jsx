@@ -15,8 +15,8 @@ const style = {
 };
 
 const validationSchema = yup.object({
-    title: yup.string('Enter the student name').required('Student name is required'),
-    studentCode: yup.string('Enter the student contact details').required('Student contact details is required'),
+    name: yup.string('Enter the student name').required('Student name is required'),
+    contactDetails: yup.string('Enter the student contact details').required('Student contact details is required'),
 
 });
 
