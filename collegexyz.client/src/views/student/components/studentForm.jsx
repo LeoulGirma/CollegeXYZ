@@ -24,8 +24,8 @@ const StudentForm = ({ open, handleClose, student, handleSubmit, formikRef }) =>
     console.log(student)
     const formik = useFormik({
         initialValues: {
-            title: student?.name || '',
-            studentCode: student?.contactDetails || ''
+            name: student?.name || '',
+            contactDetails: student?.contactDetails || ''
         },
         validationSchema: validationSchema,
         onSubmit: (values, { resetForm }) => {
