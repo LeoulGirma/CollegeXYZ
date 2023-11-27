@@ -2,6 +2,7 @@
 SETLOCAL ENABLEEXTENSIONS
 SET solution_name=CollegeXYZ.sln
 SET startup_project=CollegeXYZ.Server
+SET react_project_path=collegeXYZ.client
 
 echo Starting setup process...
 
@@ -23,9 +24,15 @@ dotnet ef database update --project %startup_project% || (
     exit /b 1
 )
 
-echo Starting the application...
-dotnet run --project %startup_project% || (
-    echo ERROR: Failed to start the application.
+echo Starting the .NET application in a new window...
+start cmd /k dotnet run --project %startup_project% || (
+    echo ERROR: Failed to start the .NET application.
+    exit /b 1
+)
+
+echo Setting up and starting React project in a new window...
+start cmd /k "cd %react_project_path% && npm install && npm run dev" || (
+    echo ERROR: Failed to start React project.
     exit /b 1
 )
 
