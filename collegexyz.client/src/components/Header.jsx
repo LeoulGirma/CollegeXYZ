@@ -47,9 +47,9 @@ const Header = () => {
           </Menu>
         </div>
 
-        <IconButton edge="end" color="inherit" aria-label="menu">
+        {/* <IconButton edge="end" color="inherit" aria-label="menu">
           <MenuIcon />
-        </IconButton>
+        </IconButton> */}
       </Toolbar>
     </AppBar>
   );
